@@ -14,7 +14,8 @@
     "iconify",
     "vmodel",
     "Prefixs",
-    "nocheck"
+    "nocheck",
+    "handlebook"
   ],
   "prettier.enable": false,
   "editor.formatOnSave": false,
