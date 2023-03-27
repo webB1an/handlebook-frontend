@@ -15,6 +15,7 @@ base on [simple-vite-templete-v2](https://github.com/webB1an/simple-vite-templet
 - [x] 通过 midjourney 设计 logo
 - [x] 自适应侧边栏布局
 - [x] 定位锚点跳转
+- [ ] 自适应侧边栏布局的多菜单情况
 - [ ] tooltip
 - [ ] 页面数据填充
 - [ ] 页面数据动态化
