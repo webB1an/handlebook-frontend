@@ -34,5 +34,5 @@ export default defineConfig({
     transformerDirectives(),
     transformerVariantGroup(),
   ],
-  safelist: 'prose prose-sm m-auto text-left'.split(' '),
+  safelist: 'prose prose-sm m-auto text-left i-carbon:data-enrichment-add i-carbon:edit i-carbon:tools i-carbon-video i-carbon:ruler-alt i-carbon:document i-carbon-blog i-carbon-code i-carbon-html i-carbon-app i-carbon-video'.split(' '),
 })
