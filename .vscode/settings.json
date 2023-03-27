@@ -15,7 +15,9 @@
     "vmodel",
     "Prefixs",
     "nocheck",
-    "handlebook"
+    "handlebook",
+    "sider",
+    "unref"
   ],
   "prettier.enable": false,
   "editor.formatOnSave": false,
