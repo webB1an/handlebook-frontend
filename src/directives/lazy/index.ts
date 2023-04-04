@@ -16,12 +16,14 @@ const imageIsExist = (src: string) => {
 export default function lazy(el: any) {
   const src = el.getAttribute('custom-src')
   const io = new IntersectionObserver(([{ isIntersecting }]) => {
+    // eslint-disable-next-line no-console
+    console.log('isIntersecting', isIntersecting)
     if (isIntersecting) {
       imageIsExist(src).then((exist) => {
         if (exist)
-          el.src = src
+          el.setAttribute('src', src)
         else
-          el.src = errorImage
+          el.setAttribute('src', errorImage)
 
         io.disconnect()
       })
