@@ -7,12 +7,12 @@ import Nav from '~/pages/navigation/index.vue'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: 'nav',
+    redirect: 'ai-compass',
     component: Layout,
     children: [
       {
-        path: 'nav',
-        name: 'Nav',
+        path: 'ai-compass',
+        name: 'AICompass',
         component: Nav,
       },
     ],

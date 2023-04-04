@@ -118,7 +118,7 @@ const scrollTo = (menu: Menu) => {
               </div>
               <span v-show="!appStore.siderCollapsed">{{ menu.name }}</span>
             </a>
-            <div v-if="menu.children" :class="menu.showChildren ? 'rotate-0!' : ''" class="i-carbon:chevron-down absolute right-2 top-50% -translate-y-50% text-sm rotate-270" />
+            <div v-if="menu.children && !appStore.siderCollapsed" :class="menu.showChildren ? 'rotate-0!' : ''" class="i-carbon:chevron-down absolute right-2 top-50% -translate-y-50% text-sm rotate-270" />
           </Tooltip>
           <div v-if="menu.children" v-show="!appStore.siderCollapsed" :style="menu.showChildren ? `height: ${menu.children.length * 48}px` : `height: 0`" class="overflow-hidden transition-height duration-300 ease">
             <template v-for="item in menu.children" :key="item.link">
