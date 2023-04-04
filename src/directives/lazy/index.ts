@@ -1,4 +1,3 @@
-import type { DirectiveBinding } from 'vue'
 import errorImage from '~/assets/ai_compass.png'
 
 const imageIsExist = (src: string) => {
@@ -14,9 +13,8 @@ const imageIsExist = (src: string) => {
   })
 }
 
-export default function lazy(el: any, bingding: DirectiveBinding) {
-  const src = el.src
-  el.src = ''
+export default function lazy(el: any) {
+  const src = el.getAttribute('custom-src')
   const io = new IntersectionObserver(([{ isIntersecting }]) => {
     if (isIntersecting) {
       imageIsExist(src).then((exist) => {
