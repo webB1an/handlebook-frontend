@@ -34,5 +34,5 @@ export default defineConfig({
     transformerDirectives(),
     transformerVariantGroup(),
   ],
-  safelist: 'prose prose-sm m-auto text-left i-carbon:data-enrichment-add i-carbon:edit i-carbon:tools i-carbon-video i-carbon:ruler-alt i-carbon:document i-carbon-blog i-carbon-code i-carbon-html i-carbon-app i-carbon-video'.split(' '),
+  safelist: 'prose prose-sm m-auto text-left i-carbon:data-enrichment-add i-carbon:edit i-carbon:tools i-carbon-video i-carbon:ruler-alt i-carbon:document i-carbon-blog i-carbon-code i-carbon-html i-carbon-app i-carbon-video i-carbon:image i-carbon:image-copy i-carbon:svg i-carbon:color-palette i-carbon:image-search i-carbon:carbon-for-ibm-product '.split(' '),
 })

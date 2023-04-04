@@ -16,5 +16,6 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     SiderBar: typeof import('./../src/components/SiderBar/index.vue')['default']
     Tooltip: typeof import('./../src/components/Tooltip/index.vue')['default']
+    TooltipInner: typeof import('./../src/components/Tooltip/TooltipInner.vue')['default']
   }
 }

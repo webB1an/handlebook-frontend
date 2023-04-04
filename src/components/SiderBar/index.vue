@@ -1,7 +1,10 @@
 <script lang='ts' setup>
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
-import logo from '~/assets/logo1.png'
-import menuConfig from '~/config/menu'
+import logo from '~/assets/logo.png'
+import configMenu from '~/config/menu'
+import type { Menu } from '~/config/menu'
+
+const menuConfig = ref(configMenu)
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
@@ -56,8 +59,30 @@ const toggleSiderCollapsed = () => {
   appStore.toggleSiderCollapsed(!appStore.siderCollapsed)
 }
 
+const menuToTooltipText = (menu: Menu) => {
+  if (menu.children) {
+    return menu.children.map((child) => {
+      return {
+        name: child.name,
+        link: child.link || '',
+      }
+    })
+  }
+
+  return menu.name
+}
+
+const openMenu = (menu: Menu) => {
+  menu.showChildren = !menu.showChildren
+}
+
 // 锚点跳转
-const scrollTo = (id: string) => {
+const scrollTo = (menu: Menu) => {
+  if (menu.children)
+    openMenu(menu)
+  if (!menu.link)
+    return
+  const id = menu.link
   const el = document.getElementById(id)
   if (el) {
     const offsetTop = el.offsetTop
@@ -83,17 +108,26 @@ const scrollTo = (id: string) => {
       </div>
     </div>
 
-    <div class="sider-bar-menu p-2">
+    <div class="sider-bar-menu">
       <ul>
-        <li v-for="menu in menuConfig" :key="menu.link">
-          <Tooltip :show="appStore.siderCollapsed" :text="`${menu.name}`" place="right" :position="20">
-            <a class="sider-bar-item-link flex items-center text-sm text-#515C6B hover:text-#f1404b hover:bg-#000/10 hover:rounded-md cursor-pointer" @click="scrollTo(menu.link)">
+        <li v-for="menu in menuConfig" :key="menu.name" class="relative p-2">
+          <Tooltip hide-container=".main-container" :show="appStore.siderCollapsed" :link="menu.link ?? ''" :text="menuToTooltipText(menu)" place="right" :instance="8" :scroll="scrollTo">
+            <a class="sider-bar-item-link flex items-center w-100% text-sm text-#515C6B hover:text-#f1404b hover:bg-#000/10 hover:rounded-md cursor-pointer" @click="scrollTo(menu)">
               <div class="flex justify-center items-center w-12 h-12">
                 <div :class="menu.icon" class="text-5 text-#bbbec3" />
               </div>
               <span v-show="!appStore.siderCollapsed">{{ menu.name }}</span>
             </a>
+            <div v-if="menu.children" :class="menu.showChildren ? 'rotate-0!' : ''" class="i-carbon:chevron-down absolute right-2 top-50% -translate-y-50% text-sm rotate-270" />
           </Tooltip>
+          <div v-if="menu.children" v-show="!appStore.siderCollapsed" :style="menu.showChildren ? `height: ${menu.children.length * 48}px` : `height: 0`" class="overflow-hidden transition-height duration-300 ease">
+            <template v-for="item in menu.children" :key="item.link">
+              <a class="sider-bar-item-link flex items-center w-100% text-sm text-#515C6B hover:text-#f1404b hover:bg-#000/10 hover:rounded-md cursor-pointer" @click="scrollTo(item)">
+                <div class="flex justify-center items-center w-12 h-12" />
+                <span>{{ item.name }}</span>
+              </a>
+            </template>
+          </div>
         </li>
       </ul>
     </div>
@@ -103,5 +137,6 @@ const scrollTo = (id: string) => {
 <style>
 .sider-bar-menu {
   height: calc(100vh - 4.5rem);
+  overflow-y: auto;
 }
 </style>

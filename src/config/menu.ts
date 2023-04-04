@@ -1,12 +1,13 @@
-interface Menu {
+export interface Menu {
   name: string
   icon: string
   link?: string
   list?: List[]
   children?: Menu[]
+  showChildren?: boolean
 }
 
-interface List {
+export interface List {
   name: string
   icon: string
   href: string

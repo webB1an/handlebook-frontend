@@ -30,7 +30,7 @@ const siderCollapsedClass = computed(() => {
 <template>
   <div class="flex h-screen bg-#f0f2f4">
     <sider-bar />
-    <div :class="siderCollapsedClass" class="w-100% h-screen z-1">
+    <div :class="siderCollapsedClass" class="main-container w-100% h-screen z-1">
       <header-nav />
       <router-view />
     </div>
