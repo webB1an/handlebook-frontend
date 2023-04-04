@@ -13,21 +13,26 @@ const imageIsExist = (src: string) => {
   })
 }
 
-export default function lazy(el: any) {
-  const src = el.getAttribute('custom-src')
-  const io = new IntersectionObserver(([{ isIntersecting }]) => {
-    // eslint-disable-next-line no-console
-    console.log('isIntersecting', isIntersecting)
-    if (isIntersecting) {
-      imageIsExist(src).then((exist) => {
-        if (exist)
-          el.setAttribute('src', src)
-        else
-          el.setAttribute('src', errorImage)
+export const lazy = {
+  mounted(el: Element) {
+    const src = el.getAttribute('custom-src')!
+    const io = new IntersectionObserver(([{ isIntersecting }]) => {
+      if (isIntersecting) {
+        imageIsExist(src).then((exist) => {
+          if (exist)
+            el.setAttribute('src', src)
+          else
+            el.setAttribute('src', errorImage)
 
-        io.disconnect()
-      })
-    }
-  })
-  io.observe(el)
+          io.disconnect()
+        })
+      }
+    })
+    io.observe(el)
+  },
+}
+
+export default {
+  name: 'lazy',
+  directive: lazy,
 }
